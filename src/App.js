@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from "react-router-dom";
+import {Layout} from "antd";
+import {NavBar, Contents} from "./layout";
+import {VideoDetail, ChannelDetail, SearchContent} from "./components";
+import {DrawerProvider} from "./components/Drawer/DrawerProvider";
+import {CollapseProvider} from "./components/Drawer/CollapseProvider";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = () => {
+    return (
+        <Layout>
+            <DrawerProvider>
+                <NavBar />
+                <CollapseProvider>
+                    <Routes>
+                        <Route path="/" element={<Contents />} />
+                        <Route path="/video/:id" element={<VideoDetail />} />
+                        <Route path="/channel/:id" element={<ChannelDetail />} />
+                        <Route path="/search/:searchTerm" element={<SearchContent />} />
+                    </Routes>
+                </CollapseProvider>
+            </DrawerProvider>
+        </Layout>
   );
 }
 
